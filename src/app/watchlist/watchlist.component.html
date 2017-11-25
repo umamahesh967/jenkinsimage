@@ -1,0 +1,29 @@
+<h1 class="text-center">Your Watchlist</h1>
+<div class="container" *ngIf="watchList">
+  <h3 >Your Favourite movies </h3>
+  <br>
+  <div class="row card-group">
+    <div class="col-4" *ngFor="let movie of watchList">
+      <div class="card text-center">
+        <a (click)="goToDetail(movie.id)">
+          <div class="media">
+            <img class="moviePoster" class="d-flex mr-3 img-responsive" src="https://image.tmdb.org/t/p/w300/{{movie.posterPath}}" alt="{{movie.title}}">
+            <div class="media-body">
+              <h5 class="mt-0" class="movieDescription">{{movie.name}} ({{movie.releaseDate| date:'y'}})</h5>
+              <p>Rating: {{movie.voteAverage}} ({{movie.voteCount}})</p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <hr />
+      <form>
+        <div class="form-group">
+          <label for="commentBox">{{movie.comments}}</label>
+          <input #commentsBox type="/textarea" class="movieCommentsInpt" class="form-control" id="commentsBox" name="commentsBox">
+          <button  id="movieUpdateCommentsBtn" type="button" class="btn btn-info" (click)="updateComments(movie.id,commentsBox.value)">Update</button>
+          <button  id="movieRemoveBtn" type="button" class="btn btn-danger" (click)="removeFromWatchList(movie.id)">Remove from Watchlist</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
